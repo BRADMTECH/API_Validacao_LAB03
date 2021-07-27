@@ -1,27 +1,22 @@
 const fdk = require('@fnproject/fdk');
-const request = require('request');
+const axios = require('axios');
 
-fdk.handle(function (input) {
+fdk.handle(async function (input) {
 
-  var options = {
-    'method': 'GET',
-    'url': process.env.APIURL,
-    'headers': {
+  (async () => {
+    try {
+      const response = await axios.get(process.env.APIURL)
+      console.log(response.data.status);
+      if (!response.data.status) {
+        console.log("Api Test: Fail")
+        return false
+      }
+      console.log("Api Test: Success")
+      return true
     }
-  };
-
-  request(options, function (error, response) {
-    if (error) throw new Error(error);
-    const parsedResponse = JSON.parse(response.body)
-    console.log(parsedResponse)
-    const apiStatus = parsedResponse.status
-    console.log(apiStatus)
-    if (!apiStatus) {
-      console.log("Api Test: Fail")
-      return false
+    catch (error) {
+      console.log(error.response.body);
     }
-    console.log("Api Test: Success")
-    return true
-  });
+  })();
 
 })
