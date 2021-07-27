@@ -3,7 +3,7 @@ const axios = require('axios');
 
 fdk.handle(async function (input) {
 
-  (async () => {
+  return await (async () => {
     try {
       const response = await axios.get(process.env.APIURL)
       console.log(response.data.status);
