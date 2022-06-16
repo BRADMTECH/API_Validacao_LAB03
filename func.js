@@ -12,7 +12,7 @@ fdk.handle(async function (input) {
         return false
       }
       console.log("Api Test: Success")
-      return "Ola Devops ORACLE"
+      return true
     }
     catch (error) {
       console.log(error.response.body);
